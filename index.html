@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayeTonKawa - Connexion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.6s ease-out;
+      }
+      .slide-up {
+        animation: slideUp 0.6s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4"
+  >
+    <div class="w-full max-w-md">
+      <!-- Logo & Titre -->
+      <div class="text-center mb-8 fade-in">
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 bg-black rounded-2xl mb-4 shadow-lg"
+        >
+          <svg
+            class="w-8 h-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+            />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900">PayeTonKawa</h1>
+        <p class="text-gray-500 mt-2">Votre café premium, livré</p>
+      </div>
+
+      <!-- Card de connexion -->
+      <div class="bg-white rounded-3xl shadow-xl p-8 slide-up">
+        <!-- Tabs -->
+        <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
+          <button
+            id="tab-login"
+            onclick="switchTab('login')"
+            class="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all duration-200 bg-white shadow text-gray-900"
+          >
+            Connexion
+          </button>
+          <button
+            id="tab-register"
+            onclick="switchTab('register')"
+            class="flex-1 py-2.5 px-4 rounded-lg text-sm font-medium transition-all duration-200 text-gray-500 hover:text-gray-700"
+          >
+            Inscription
+          </button>
+        </div>
+
+        <!-- Formulaire Login -->
+        <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="login-email"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-2 focus:ring-black/5 outline-none transition-all"
+              placeholder="vous@exemple.com"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5"
+              >Mot de passe</label
+            >
+            <input
+              type="password"
+              id="login-password"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-2 focus:ring-black/5 outline-none transition-all"
+              placeholder="••••••••"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all duration-200 mt-2"
+          >
+            Se connecter
+          </button>
+        </form>
+
+        <!-- Formulaire Register -->
+        <form
+          id="form-register"
+          onsubmit="handleRegister(event)"
+          class="space-y-4 hidden"
+        >
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="register-email"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-2 focus:ring-black/5 outline-none transition-all"
+              placeholder="vous@exemple.com"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5"
+              >Mot de passe</label
+            >
+            <input
+              type="password"
+              id="register-password"
+              required
+              minlength="6"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-2 focus:ring-black/5 outline-none transition-all"
+              placeholder="Minimum 6 caractères"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1.5"
+              >Confirmer le mot de passe</label
+            >
+            <input
+              type="password"
+              id="register-confirm"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-2 focus:ring-black/5 outline-none transition-all"
+              placeholder="••••••••"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-black text-white py-3 rounded-xl font-medium hover:bg-gray-800 active:scale-[0.98] transition-all duration-200 mt-2"
+          >
+            Créer un compte
+          </button>
+        </form>
+
+        <!-- Message d'erreur -->
+        <div
+          id="error-message"
+          class="hidden mt-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm"
+        ></div>
+      </div>
+
+      <!-- Footer -->
+      <p class="text-center text-gray-400 text-sm mt-6 fade-in">
+        © 2026 PayeTonKawa. Tous droits réservés.
+      </p>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/utils.js"></script>
+    <script>
+      // Vérifier si déjà connecté
+      if (api.isAuthenticated()) {
+        window.location.href = api.isAdmin()
+          ? "/admin/index.html"
+          : "/client/index.html";
+      }
+
+      function switchTab(tab) {
+        const loginTab = document.getElementById("tab-login");
+        const registerTab = document.getElementById("tab-register");
+        const loginForm = document.getElementById("form-login");
+        const registerForm = document.getElementById("form-register");
+        const errorMsg = document.getElementById("error-message");
+
+        errorMsg.classList.add("hidden");
+
+        if (tab === "login") {
+          loginTab.classList.add("bg-white", "shadow", "text-gray-900");
+          loginTab.classList.remove("text-gray-500");
+          registerTab.classList.remove("bg-white", "shadow", "text-gray-900");
+          registerTab.classList.add("text-gray-500");
+          loginForm.classList.remove("hidden");
+          registerForm.classList.add("hidden");
+        } else {
+          registerTab.classList.add("bg-white", "shadow", "text-gray-900");
+          registerTab.classList.remove("text-gray-500");
+          loginTab.classList.remove("bg-white", "shadow", "text-gray-900");
+          loginTab.classList.add("text-gray-500");
+          registerForm.classList.remove("hidden");
+          loginForm.classList.add("hidden");
+        }
+      }
+
+      async function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+        const errorMsg = document.getElementById("error-message");
+
+        try {
+          await api.login(email, password);
+          showToast("Connexion réussie !", "success");
+          setTimeout(() => {
+            window.location.href = api.isAdmin()
+              ? "/admin/index.html"
+              : "/client/index.html";
+          }, 500);
+        } catch (error) {
+          errorMsg.textContent = error.message || "Identifiants incorrects";
+          errorMsg.classList.remove("hidden");
+        }
+      }
+
+      async function handleRegister(e) {
+        e.preventDefault();
+        const email = document.getElementById("register-email").value;
+        const password = document.getElementById("register-password").value;
+        const confirm = document.getElementById("register-confirm").value;
+        const errorMsg = document.getElementById("error-message");
+
+        if (password !== confirm) {
+          errorMsg.textContent = "Les mots de passe ne correspondent pas";
+          errorMsg.classList.remove("hidden");
+          return;
+        }
+
+        try {
+          await api.register(email, password, "CLIENT");
+          showToast("Compte créé ! Connectez-vous", "success");
+          switchTab("login");
+          document.getElementById("login-email").value = email;
+        } catch (error) {
+          errorMsg.textContent =
+            error.message || "Erreur lors de l'inscription";
+          errorMsg.classList.remove("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayeTonKawa - Gestion des commandes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+      .slide-up {
+        animation: slideUp 0.5s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <!-- Sidebar -->
+    <aside
+      class="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-gray-200 z-30 hidden lg:block"
+    >
+      <div class="p-6 border-b border-gray-100">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-black rounded-xl flex items-center justify-center"
+          >
+            <svg
+              class="w-5 h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+              />
+            </svg>
+          </div>
+          <div>
+            <span class="font-semibold text-lg">PayeTonKawa</span>
+            <span class="block text-xs text-gray-500">Administration</span>
+          </div>
+        </div>
+      </div>
+      <nav class="p-4 space-y-1">
+        <a
+          href="/admin/index.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+          Dashboard
+        </a>
+        <a
+          href="/admin/users.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+          Utilisateurs
+        </a>
+        <a
+          href="/admin/customers.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+          Clients
+        </a>
+        <a
+          href="/admin/products.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+            />
+          </svg>
+          Produits
+        </a>
+        <a
+          href="/admin/orders.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-100 text-gray-900 font-medium"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            />
+          </svg>
+          Commandes
+        </a>
+      </nav>
+      <div
+        class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100"
+      >
+        <button
+          onclick="logout()"
+          class="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+          Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header
+      class="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-40"
+    >
+      <div class="flex items-center justify-between px-4 h-16">
+        <button
+          onclick="toggleMobileMenu()"
+          class="p-2 hover:bg-gray-100 rounded-xl"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <span class="font-semibold">Commandes</span>
+        <button
+          onclick="logout()"
+          class="p-2 hover:bg-gray-100 rounded-xl text-gray-600"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile menu -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 bg-black/50 z-50 lg:hidden hidden"
+    >
+      <div class="absolute left-0 top-0 bottom-0 w-64 bg-white">
+        <div
+          class="p-6 border-b border-gray-100 flex items-center justify-between"
+        >
+          <span class="font-semibold text-lg">Menu</span>
+          <button
+            onclick="toggleMobileMenu()"
+            class="p-2 hover:bg-gray-100 rounded-xl"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav class="p-4 space-y-1">
+          <a
+            href="/admin/index.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Dashboard</a
+          >
+          <a
+            href="/admin/users.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Utilisateurs</a
+          >
+          <a
+            href="/admin/customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Clients</a
+          >
+          <a
+            href="/admin/products.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Produits</a
+          >
+          <a
+            href="/admin/orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-100 text-gray-900 font-medium"
+            >Commandes</a
+          >
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="lg:ml-64 min-h-screen">
+      <div class="p-6 lg:p-8">
+        <div class="mb-8 fade-in">
+          <h1 class="text-3xl font-bold">Commandes</h1>
+          <p class="text-gray-500 mt-1">Suivez et gérez toutes les commandes</p>
+        </div>
+
+        <!-- Filtres -->
+        <div class="flex flex-wrap gap-2 mb-6 slide-up">
+          <button
+            onclick="filterOrders('all')"
+            class="filter-btn px-4 py-2 rounded-xl bg-black text-white font-medium transition-all"
+            data-filter="all"
+          >
+            Toutes
+          </button>
+          <button
+            onclick="filterOrders('PENDING')"
+            class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium transition-all"
+            data-filter="PENDING"
+          >
+            En attente
+          </button>
+          <button
+            onclick="filterOrders('CONFIRMED')"
+            class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium transition-all"
+            data-filter="CONFIRMED"
+          >
+            Confirmées
+          </button>
+          <button
+            onclick="filterOrders('PROCESSING')"
+            class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium transition-all"
+            data-filter="PROCESSING"
+          >
+            En préparation
+          </button>
+          <button
+            onclick="filterOrders('SHIPPED')"
+            class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium transition-all"
+            data-filter="SHIPPED"
+          >
+            Expédiées
+          </button>
+          <button
+            onclick="filterOrders('DELIVERED')"
+            class="filter-btn px-4 py-2 rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200 font-medium transition-all"
+            data-filter="DELIVERED"
+          >
+            Livrées
+          </button>
+        </div>
+
+        <!-- Liste des commandes -->
+        <div id="orders-list" class="space-y-4">
+          <!-- Commandes chargées dynamiquement -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal détail commande -->
+    <div
+      id="order-modal"
+      class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden"
+    >
+      <div
+        class="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto"
+      >
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="text-xl font-semibold">Détail de la commande</h3>
+          <button
+            onclick="closeModal()"
+            class="p-2 hover:bg-gray-100 rounded-xl transition-colors"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <div id="order-detail-content">
+          <!-- Contenu dynamique -->
+        </div>
+      </div>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/utils.js"></script>
+    <script>
+      if (!requireAdmin()) throw new Error("Accès refusé");
+
+      let allOrders = [];
+      let currentFilter = "all";
+
+      const statusColors = {
+        PENDING: {
+          bg: "bg-yellow-100",
+          text: "text-yellow-700",
+          label: "En attente",
+        },
+        CONFIRMED: {
+          bg: "bg-blue-100",
+          text: "text-blue-700",
+          label: "Confirmée",
+        },
+        PROCESSING: {
+          bg: "bg-purple-100",
+          text: "text-purple-700",
+          label: "En préparation",
+        },
+        SHIPPED: {
+          bg: "bg-indigo-100",
+          text: "text-indigo-700",
+          label: "Expédiée",
+        },
+        DELIVERED: {
+          bg: "bg-green-100",
+          text: "text-green-700",
+          label: "Livrée",
+        },
+        CANCELLED: { bg: "bg-red-100", text: "text-red-700", label: "Annulée" },
+      };
+
+      function toggleMobileMenu() {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+      }
+
+      async function loadOrders() {
+        const container = document.getElementById("orders-list");
+        showLoader(container);
+
+        try {
+          allOrders = await api.getOrders();
+          renderOrders();
+        } catch (error) {
+          container.innerHTML = `<div class="text-center py-12 text-red-500">Erreur: ${error.message}</div>`;
+        }
+      }
+
+      function renderOrders() {
+        const container = document.getElementById("orders-list");
+        let orders = allOrders;
+
+        if (currentFilter !== "all") {
+          orders = allOrders.filter((o) => o.status === currentFilter);
+        }
+
+        if (!orders || orders.length === 0) {
+          container.innerHTML = `
+                    <div class="text-center py-16 bg-white rounded-2xl border border-gray-100">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <p class="text-gray-500">Aucune commande${currentFilter !== "all" ? " dans cette catégorie" : ""}</p>
+                    </div>
+                `;
+          return;
+        }
+
+        container.innerHTML = orders
+          .map((order, index) => {
+            const status =
+              statusColors[order.status] || statusColors["PENDING"];
+            const total =
+              order.items?.reduce(
+                (sum, item) => sum + item.price * item.quantity,
+                0,
+              ) || 0;
+            const itemCount =
+              order.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
+
+            return `
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 slide-up cursor-pointer hover:shadow-md transition-shadow"
+                         style="animation-delay: ${index * 50}ms"
+                         onclick='showOrderDetail(${JSON.stringify(order).replace(/'/g, "\\'")})'>
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">#${order.id?.slice(-8) || "N/A"}</p>
+                                    <p class="text-sm text-gray-500">${order.createdAt ? formatDate(order.createdAt) : "Date inconnue"}</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <div class="text-right">
+                                    <p class="font-semibold">${formatPrice(total)}</p>
+                                    <p class="text-sm text-gray-500">${itemCount} article${itemCount > 1 ? "s" : ""}</p>
+                                </div>
+                                <span class="px-3 py-1.5 rounded-full text-sm font-medium ${status.bg} ${status.text}">
+                                    ${status.label}
+                                </span>
+                                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+      }
+
+      function filterOrders(filter) {
+        currentFilter = filter;
+
+        // Mettre à jour les boutons
+        document.querySelectorAll(".filter-btn").forEach((btn) => {
+          if (btn.dataset.filter === filter) {
+            btn.classList.remove(
+              "bg-gray-100",
+              "text-gray-600",
+              "hover:bg-gray-200",
+            );
+            btn.classList.add("bg-black", "text-white");
+          } else {
+            btn.classList.add(
+              "bg-gray-100",
+              "text-gray-600",
+              "hover:bg-gray-200",
+            );
+            btn.classList.remove("bg-black", "text-white");
+          }
+        });
+
+        renderOrders();
+      }
+
+      function showOrderDetail(order) {
+        const status = statusColors[order.status] || statusColors["PENDING"];
+        const total =
+          order.items?.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0,
+          ) || 0;
+
+        document.getElementById("order-detail-content").innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Commande</span>
+                        <span class="font-mono font-medium">#${order.id?.slice(-8) || "N/A"}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Date</span>
+                        <span>${order.createdAt ? formatDate(order.createdAt) : "-"}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500">Statut</span>
+                        <span class="px-3 py-1 rounded-full text-sm font-medium ${status.bg} ${status.text}">${status.label}</span>
+                    </div>
+
+                    <hr class="border-gray-100">
+
+                    <div>
+                        <h4 class="font-medium mb-3">Articles</h4>
+                        <div class="space-y-3">
+                            ${(order.items || [])
+                              .map(
+                                (item) => `
+                                <div class="flex items-center justify-between bg-gray-50 rounded-xl p-3">
+                                    <div>
+                                        <p class="font-medium">Produit #${item.productId?.slice(-6) || "N/A"}</p>
+                                        <p class="text-sm text-gray-500">Quantité: ${item.quantity}</p>
+                                    </div>
+                                    <span class="font-semibold">${formatPrice(item.price * item.quantity)}</span>
+                                </div>
+                            `,
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+
+                    <hr class="border-gray-100">
+
+                    <div class="flex items-center justify-between text-lg">
+                        <span class="font-semibold">Total</span>
+                        <span class="font-bold">${formatPrice(total)}</span>
+                    </div>
+                </div>
+            `;
+
+        document.getElementById("order-modal").classList.remove("hidden");
+      }
+
+      function closeModal() {
+        document.getElementById("order-modal").classList.add("hidden");
+      }
+
+      function logout() {
+        api.logout();
+        window.location.href = "/index.html";
+      }
+
+      loadOrders();
+    </script>
+  </body>
+</html>

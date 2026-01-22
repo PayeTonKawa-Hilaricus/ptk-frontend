@@ -1,0 +1,47 @@
+name: 🚀 Deploy Frontend to PC2
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy-pc2:
+    name: 📦 Build & Deploy
+    runs-on: [self-hosted, production-pc] # Ton runner sur PC2
+
+    steps:
+      - name: 🚚 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🔄 Update & Restart Frontend
+        shell: powershell
+        run: |
+          # Configuration des chemins
+          $ROOT = "C:\PayeTonKawa"
+          $FRONTEND_DIR = "$ROOT\ptk-frontend"
+          $INFRA_DIR = "$ROOT\ptk-infrastructure"
+
+          Write-Host "🚀 DEBUT DU DEPLOIEMENT FRONTEND"
+
+          # 1. On met à jour le code source du Frontend
+          if (-not (Test-Path $FRONTEND_DIR)) {
+            # Si le dossier n'existe pas encore, on le clone
+            cd $ROOT
+            git clone https://github.com/TonPseudo/ptk-frontend.git
+          }
+
+          cd $FRONTEND_DIR
+          git fetch origin
+          git reset --hard origin/main
+
+          # 2. On va dans l'infra pour lancer la reconstruction Docker
+          cd $INFRA_DIR
+
+          # On reconstruit l'image et on relance le conteneur
+          # --no-deps évite de relancer les autres services (Auth, Products, etc.)
+          docker compose up -d --build --no-deps ptk-frontend
+
+          # Nettoyage des vieilles images pour gagner de la place
+          docker image prune -f
+
+          Write-Host "✅ DEPLOIEMENT REUSSI : http://localhost:8080"

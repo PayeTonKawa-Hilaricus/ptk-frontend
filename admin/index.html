@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PayeTonKawa - Administration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
+      }
+      .slide-up {
+        animation: slideUp 0.5s ease-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-gray-50">
+    <!-- Sidebar -->
+    <aside
+      class="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-gray-200 z-30 hidden lg:block"
+    >
+      <div class="p-6 border-b border-gray-100">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 bg-black rounded-xl flex items-center justify-center"
+          >
+            <svg
+              class="w-5 h-5 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+              />
+            </svg>
+          </div>
+          <div>
+            <span class="font-semibold text-lg">PayeTonKawa</span>
+            <span class="block text-xs text-gray-500">Administration</span>
+          </div>
+        </div>
+      </div>
+      <nav class="p-4 space-y-1">
+        <a
+          href="/admin/index.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-100 text-gray-900 font-medium"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+          Dashboard
+        </a>
+        <a
+          href="/admin/users.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+          Utilisateurs
+        </a>
+        <a
+          href="/admin/customers.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+          Clients
+        </a>
+        <a
+          href="/admin/products.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+            />
+          </svg>
+          Produits
+        </a>
+        <a
+          href="/admin/orders.html"
+          class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            />
+          </svg>
+          Commandes
+        </a>
+      </nav>
+      <div
+        class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100"
+      >
+        <button
+          onclick="logout()"
+          class="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-gray-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+          Déconnexion
+        </button>
+      </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header
+      class="lg:hidden bg-white border-b border-gray-200 sticky top-0 z-40"
+    >
+      <div class="flex items-center justify-between px-4 h-16">
+        <button
+          onclick="toggleMobileMenu()"
+          class="p-2 hover:bg-gray-100 rounded-xl"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <span class="font-semibold">Administration</span>
+        <button
+          onclick="logout()"
+          class="p-2 hover:bg-gray-100 rounded-xl text-gray-600"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Mobile menu overlay -->
+    <div
+      id="mobile-menu"
+      class="fixed inset-0 bg-black/50 z-50 lg:hidden hidden"
+    >
+      <div class="absolute left-0 top-0 bottom-0 w-64 bg-white">
+        <div
+          class="p-6 border-b border-gray-100 flex items-center justify-between"
+        >
+          <span class="font-semibold text-lg">Menu</span>
+          <button
+            onclick="toggleMobileMenu()"
+            class="p-2 hover:bg-gray-100 rounded-xl"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav class="p-4 space-y-1">
+          <a
+            href="/admin/index.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gray-100 text-gray-900 font-medium"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            Dashboard
+          </a>
+          <a
+            href="/admin/users.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Utilisateurs</a
+          >
+          <a
+            href="/admin/customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Clients</a
+          >
+          <a
+            href="/admin/products.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Produits</a
+          >
+          <a
+            href="/admin/orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600"
+            >Commandes</a
+          >
+        </nav>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main class="lg:ml-64 min-h-screen">
+      <div class="p-6 lg:p-8">
+        <div class="mb-8 fade-in">
+          <h1 class="text-3xl font-bold">Dashboard</h1>
+          <p class="text-gray-500 mt-1">Vue d'ensemble de votre activité</p>
+        </div>
+
+        <!-- Stats cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 slide-up"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-blue-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">Utilisateurs</p>
+            <p id="stat-users" class="text-2xl font-bold">-</p>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 slide-up"
+            style="animation-delay: 50ms"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">Clients</p>
+            <p id="stat-customers" class="text-2xl font-bold">-</p>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 slide-up"
+            style="animation-delay: 100ms"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-purple-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">Produits</p>
+            <p id="stat-products" class="text-2xl font-bold">-</p>
+          </div>
+
+          <div
+            class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 slide-up"
+            style="animation-delay: 150ms"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-orange-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="text-sm text-gray-500 mb-1">Commandes</p>
+            <p id="stat-orders" class="text-2xl font-bold">-</p>
+          </div>
+        </div>
+
+        <!-- Recent orders -->
+        <div
+          class="bg-white rounded-2xl shadow-sm border border-gray-100 slide-up"
+          style="animation-delay: 200ms"
+        >
+          <div class="p-6 border-b border-gray-100">
+            <h2 class="text-lg font-semibold">Dernières commandes</h2>
+          </div>
+          <div id="recent-orders" class="divide-y divide-gray-100">
+            <!-- Commandes chargées dynamiquement -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/utils.js"></script>
+    <script>
+      if (!requireAdmin()) throw new Error("Accès refusé");
+
+      function toggleMobileMenu() {
+        document.getElementById("mobile-menu").classList.toggle("hidden");
+      }
+
+      async function loadDashboard() {
+        try {
+          // Charger les stats en parallèle
+          const [users, customers, products, orders] = await Promise.all([
+            api.getUsers().catch(() => []),
+            api.getCustomers().catch(() => []),
+            api.getProducts().catch(() => []),
+            api.getOrders().catch(() => []),
+          ]);
+
+          document.getElementById("stat-users").textContent = users.length || 0;
+          document.getElementById("stat-customers").textContent =
+            customers.length || 0;
+          document.getElementById("stat-products").textContent =
+            products.length || 0;
+          document.getElementById("stat-orders").textContent =
+            orders.length || 0;
+
+          // Afficher les dernières commandes
+          const recentOrders = orders.slice(0, 5);
+          const ordersContainer = document.getElementById("recent-orders");
+
+          if (recentOrders.length === 0) {
+            ordersContainer.innerHTML = `
+                        <div class="p-6 text-center text-gray-500">
+                            Aucune commande pour le moment
+                        </div>
+                    `;
+            return;
+          }
+
+          const statusColors = {
+            PENDING: {
+              bg: "bg-yellow-100",
+              text: "text-yellow-700",
+              label: "En attente",
+            },
+            CONFIRMED: {
+              bg: "bg-blue-100",
+              text: "text-blue-700",
+              label: "Confirmée",
+            },
+            PROCESSING: {
+              bg: "bg-purple-100",
+              text: "text-purple-700",
+              label: "En préparation",
+            },
+            SHIPPED: {
+              bg: "bg-indigo-100",
+              text: "text-indigo-700",
+              label: "Expédiée",
+            },
+            DELIVERED: {
+              bg: "bg-green-100",
+              text: "text-green-700",
+              label: "Livrée",
+            },
+            CANCELLED: {
+              bg: "bg-red-100",
+              text: "text-red-700",
+              label: "Annulée",
+            },
+          };
+
+          ordersContainer.innerHTML = recentOrders
+            .map((order) => {
+              const status =
+                statusColors[order.status] || statusColors["PENDING"];
+              const total =
+                order.items?.reduce(
+                  (sum, item) => sum + item.price * item.quantity,
+                  0,
+                ) || 0;
+              return `
+                        <div class="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors">
+                            <div>
+                                <p class="font-medium">#${order.id?.slice(-8) || "N/A"}</p>
+                                <p class="text-sm text-gray-500">${order.createdAt ? formatDate(order.createdAt) : "-"}</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <span class="font-semibold">${formatPrice(total)}</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-medium ${status.bg} ${status.text}">${status.label}</span>
+                            </div>
+                        </div>
+                    `;
+            })
+            .join("");
+        } catch (error) {
+          console.error("Erreur chargement dashboard:", error);
+        }
+      }
+
+      function logout() {
+        api.logout();
+        window.location.href = "/index.html";
+      }
+
+      loadDashboard();
+    </script>
+  </body>
+</html>
