@@ -27,7 +27,7 @@ jobs:
           if (-not (Test-Path $FRONTEND_DIR)) {
             # Si le dossier n'existe pas encore, on le clone
             cd $ROOT
-            git clone https://github.com/TonPseudo/ptk-frontend.git
+            git clone https://github.com/PayeTonKawa-Hilaricus/ptk-frontend.git
           }
 
           cd $FRONTEND_DIR
